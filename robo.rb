@@ -14,13 +14,31 @@ class Rover
     str.chars.each do |ins|
       if ins == 'M'
         move
-      elsif ins == 'L'
-        @p = @@pos[(@@pos.index(@p) + @@pos.count - 1)% @@pos.count]
       elsif ins == 'R'
         @p = @@pos[(@@pos.index(@p) + 1)% @@pos.count]
+      elsif ins == 'L'
+        @p = @@pos[(@@pos.index(@p) + @@pos.count - 1)% @@pos.count]
       else
         raise "Unknown instruction"
       end
     end
   end
+
+  def move
+    case @p
+    when 'N'
+      @y += 1
+    when 'S'
+      @y -= 1
+    when 'E'
+      @x += 1
+    when 'W'
+      @x -= 1
+    end
+  end
+
+  def to_s
+    "#{@x} #{@y} #{@p}"
+  end
+
 end
