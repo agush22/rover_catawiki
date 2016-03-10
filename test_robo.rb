@@ -22,6 +22,30 @@ describe Rover do
     lambda {Rover.new(3,4,'Y')}.must_raise(ArgumentError)
   end
 
+  it "can turn left" do
+    rover = Rover.new(1,1,'N')
+    rover.instruction('L')
+    rover.p.must_equal 'W'
+    rover.instruction('L')
+    rover.p.must_equal ('S')
+    rover.instruction('L')
+    rover.p.must_equal ('E')
+    rover.instruction('L')
+    rover.p.must_equal ('N')
+  end
+
+  it "can turn right" do
+    rover = Rover.new(1,1,'N')
+    rover.instruction('R')
+    rover.p.must_equal 'E'
+    rover.instruction('R')
+    rover.p.must_equal ('S')
+    rover.instruction('R')
+    rover.p.must_equal ('W')
+    rover.instruction('R')
+    rover.p.must_equal ('N')
+  end
+
   it "can move with instructions" do
     rover = Rover.new(1,2,'N')
     rover.instruction('L')
