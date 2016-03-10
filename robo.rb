@@ -1,13 +1,17 @@
 class Rover
   @@pos = %w(N E S W)
-  attr_reader :x, :y, :p
-  def initialize(x=1,y=1,p='N')
-    if x < 0 || y < 0 || !@@pos.include?(p)
+
+  attr_reader :x, :y, :p, :mx, :my
+
+  def initialize(x=1,y=1,p='N',mx=5, my=5)
+    if !x.between?(0, mx) || !y.between?(0, my) || !@@pos.include?(p)
       raise ArgumentError.new("Not a valid argument")
     end
     @x = x
     @y = y
     @p = p
+    @mx = mx
+    @my = my
   end
 
   def instruction(str)
@@ -27,13 +31,29 @@ class Rover
   def move
     case @p
     when 'N'
-      @y += 1
+      if @y < @my
+        @y += 1
+      else
+        raise "Can't go out of north boundaries"
+      end
     when 'S'
-      @y -= 1
+      if @y > 0
+        @y -= 1
+      else
+        raise "Can't go out of south boundaries"
+      end
     when 'E'
-      @x += 1
+      if @x < @mx
+        @x += 1
+      else
+        raise "Can't go out of east boundaries"
+      end
     when 'W'
-      @x -= 1
+      if @x > 0
+        @x -= 1
+      else
+        raise "Can't go out of west boundaries"
+      end
     end
   end
 

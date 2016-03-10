@@ -70,6 +70,22 @@ describe Rover do
     rover.x.must_equal 0
   end
 
+  it "can not move past north boundary" do
+    lambda {Rover.new(5,5,'N', 5, 5).move}.must_raise(RuntimeError)
+  end
+
+  it "can not move past south boundary" do
+    lambda {Rover.new(0,0,'S', 5, 5).move}.must_raise(RuntimeError)
+  end
+
+  it "can not move past east boundary" do
+    lambda {Rover.new(5,0,'E', 5, 5).move}.must_raise(RuntimeError)
+  end
+
+  it "can not move past west boundary" do
+    lambda {Rover.new(0,0,'W', 5, 5).move}.must_raise(RuntimeError)
+  end
+
   it "can move with instructions" do
     rover = Rover.new(1,2,'N')
     rover.instruction('L')
