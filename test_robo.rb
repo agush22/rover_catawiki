@@ -19,6 +19,28 @@ describe Rover do
   end
 
   it "can not be created with wrong arguments" do
-   lambda {Rover.new(3,4,'Y')}.must_raise(ArgumentError)
+    lambda {Rover.new(3,4,'Y')}.must_raise(ArgumentError)
+  end
+
+  it "can move with instructions" do
+    rover = Rover.new(1,2,'N')
+    rover.instruction('L')
+    rover.instruction('M')
+    rover.instruction('L')
+    rover.instruction('M')
+    rover.instruction('L')
+    rover.instruction('M')
+    rover.instruction('L')
+    rover.instruction('M')
+    rover.instruction('M')
+    rover.x.must_equal 3
+    rover.y.must_equal 3
+    rover.p.must_equal 'E'
+  end
+
+  it "can move with  a string of instructions and report position" do
+    rover = Rover.new(3,3,'E')
+    rover.instruction('MMRMMRMRRM')
+    rover.to_s.must_equal '5 1 E'
   end
 end
