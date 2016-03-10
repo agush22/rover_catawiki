@@ -27,11 +27,11 @@ describe Rover do
     rover.instruction('L')
     rover.p.must_equal 'W'
     rover.instruction('L')
-    rover.p.must_equal ('S')
+    rover.p.must_equal 'S'
     rover.instruction('L')
-    rover.p.must_equal ('E')
+    rover.p.must_equal 'E'
     rover.instruction('L')
-    rover.p.must_equal ('N')
+    rover.p.must_equal 'N'
   end
 
   it "can turn right" do
@@ -39,11 +39,35 @@ describe Rover do
     rover.instruction('R')
     rover.p.must_equal 'E'
     rover.instruction('R')
-    rover.p.must_equal ('S')
+    rover.p.must_equal 'S'
     rover.instruction('R')
-    rover.p.must_equal ('W')
+    rover.p.must_equal 'W'
     rover.instruction('R')
-    rover.p.must_equal ('N')
+    rover.p.must_equal 'N'
+  end
+
+  it "can move north" do
+    rover = Rover.new(1,1,'N')
+    rover.move
+    rover.y.must_equal 2
+  end
+
+  it "can move south" do
+    rover = Rover.new(1,1,'S')
+    rover.move
+    rover.y.must_equal 0
+  end
+
+  it "can move east" do
+    rover = Rover.new(1,1,'E')
+    rover.move
+    rover.x.must_equal 2
+  end
+
+  it "can move west" do
+    rover = Rover.new(1,1,'W')
+    rover.move
+    rover.x.must_equal 0
   end
 
   it "can move with instructions" do
@@ -57,12 +81,12 @@ describe Rover do
     rover.instruction('L')
     rover.instruction('M')
     rover.instruction('M')
-    rover.x.must_equal 3
+    rover.x.must_equal 1
     rover.y.must_equal 3
-    rover.p.must_equal 'E'
+    rover.p.must_equal 'N'
   end
 
-  it "can move with  a string of instructions and report position" do
+  it "can move with a string of instructions and report position" do
     rover = Rover.new(3,3,'E')
     rover.instruction('MMRMMRMRRM')
     rover.to_s.must_equal '5 1 E'
