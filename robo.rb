@@ -1,10 +1,10 @@
 class Rover
-  @@pos = %w(N E S W)
+  POS = %w(N E S W)
 
   attr_reader :x, :y, :p, :mx, :my
 
   def initialize(x=1,y=1,p='N',mx=5, my=5)
-    if !x.between?(0, mx) || !y.between?(0, my) || !@@pos.include?(p)
+    if !x.between?(0, mx) || !y.between?(0, my) || !POS.include?(p)
       raise ArgumentError.new("Not a valid argument")
     end
     @x = x
@@ -19,9 +19,9 @@ class Rover
       if ins == 'M'
         move
       elsif ins == 'R'
-        @p = @@pos[(@@pos.index(@p) + 1)% @@pos.count]
+        @p = POS[(POS.index(@p) + 1)% POS.count]
       elsif ins == 'L'
-        @p = @@pos[(@@pos.index(@p) + @@pos.count - 1)% @@pos.count]
+        @p = POS[(POS.index(@p) + POS.count - 1)% POS.count]
       else
         raise "Unknown instruction"
       end
